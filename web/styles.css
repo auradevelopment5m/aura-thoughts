@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'Graphite';
+    src: url('fonts/geomotos_extrabold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.thought-bubble {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 20px;
+    padding: 10px 20px;
+    min-width: 200px;
+    max-width: 80%;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-family: 'Graphite', sans-serif;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.thought-icon {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.thought-text {
+    font-size: 16px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+    .thought-bubble {
+        flex-direction: column;
+        padding: 10px 15px;
+    }
+
+    .thought-icon {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .thought-text {
+        white-space: normal;
+    }
+}
