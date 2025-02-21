@@ -26,6 +26,14 @@ Aura Thoughts is a FiveM script that displays contextual thought bubbles when pl
 
 **For more detailed information, please refer to our [official documentation](https://zdevelopment.gitbook.io/aura-development5m/free-scripts/aura-thoughts).**
 
+## Images
+- [Sewers](https://r2.fivemanage.com/fxZvh2eJuuybSoHhD5y9S/images/image_2025-02-21_232740882.png)
+- [WhiteWidow](https://r2.fivemanage.com/fxZvh2eJuuybSoHhD5y9S/images/image_2025-02-21_232646545.png)
+- [LSCustoms](https://r2.fivemanage.com/fxZvh2eJuuybSoHhD5y9S/images/image_2025-02-21_232706178.png)
+- [CourtHouse](https://r2.fivemanage.com/fxZvh2eJuuybSoHhD5y9S/images/image_2025-02-21_233031583.png)
+
+# Video
+[Preview](https://streamable.com/wt6rtz)
 
 ## License
 
