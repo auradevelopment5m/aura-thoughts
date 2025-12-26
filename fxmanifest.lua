@@ -4,7 +4,7 @@ lua54 'yes'
 name 'Aura'
 author 'Aura Development'
 description 'Simple Thoughts script to showcase thoughts in different zones!'
-version '1.0.0'
+version '1.0.1'
 
 ui_page 'web/index.html'
 
@@ -12,7 +12,7 @@ files {
     'web/index.html',
     'web/script.js',
     'web/styles.css',
-    'web/fonts/geomotos_extrabold.otf'
+    'web/fonts/Rowdies-Regular.ttf'
 }
 
 shared_scripts {
