@@ -4,13 +4,13 @@ let thoughtTimeout = null;
 window.addEventListener('message', function(event) {
     var item = event.data;
     if (item.type === "showThought") {
-        showThought(item.text, item.icon, item.duration);
+        showThought(item.text, item.icon, item.duration, item.iconColor, item.borderColor);
     } else if (item.type === "hideThought") {
         hideThought();
     }
 });
 
-function showThought(text, icon, duration) {
+function showThought(text, icon, duration, iconColor, borderColor) {
     var thoughtBubble = document.getElementById('thought-bubble');
     var thoughtText = document.getElementById('thought-text');
     var thoughtIcon = document.getElementById('thought-icon');
@@ -23,23 +23,36 @@ function showThought(text, icon, duration) {
         if (currentThought) {
             thoughtBubble.style.opacity = '0';
             setTimeout(() => {
-                updateThought(text, icon, duration);
+                updateThought(text, icon, duration, iconColor, borderColor);
             }, 100);
         } else {
-            updateThought(text, icon, duration);
+            updateThought(text, icon, duration, iconColor, borderColor);
         }
     } else {
         console.error('One or more elements not found');
     }
 }
 
-function updateThought(text, icon, duration) {
+function updateThought(text, icon, duration, iconColor, borderColor) {
     var thoughtBubble = document.getElementById('thought-bubble');
     var thoughtText = document.getElementById('thought-text');
     var thoughtIcon = document.getElementById('thought-icon');
 
     thoughtText.textContent = text;
     thoughtIcon.className = 'fas ' + icon;
+
+    // Apply colors
+    if (iconColor) {
+        thoughtIcon.style.color = iconColor;
+    } else {
+        thoughtIcon.style.color = '#b0b0b0'; // default
+    }
+
+    if (borderColor) {
+        thoughtBubble.style.borderColor = borderColor;
+    } else {
+        thoughtBubble.style.borderColor = 'rgba(255, 255, 255, 0.1)'; // default
+    }
 
     thoughtBubble.style.display = 'flex';
     setTimeout(() => {
@@ -52,7 +65,7 @@ function updateThought(text, icon, duration) {
         thoughtText.style.whiteSpace = 'nowrap';
     }
 
-    currentThought = { text, icon, duration };
+    currentThought = { text, icon, duration, iconColor, borderColor };
 
     if (duration) {
         thoughtTimeout = setTimeout(() => {

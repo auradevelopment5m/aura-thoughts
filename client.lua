@@ -10,17 +10,19 @@ local function AuraCheck(debugFunction, normalFunction)
     end
 end
 
-local function ShowThought(text, icon, duration)
-    currentThought = { text = text, icon = icon, duration = duration }
+local function ShowThought(text, icon, duration, iconColor, borderColor)
+    currentThought = { text = text, icon = icon, duration = duration, iconColor = iconColor, borderColor = borderColor }
     SendNUIMessage({
         type = 'showThought',
         text = text,
         icon = icon,
-        duration = duration
+        duration = duration,
+        iconColor = iconColor,
+        borderColor = borderColor
     })
 
     AuraCheck(function()
-        lib.print.debug(string.format("Showing thought: Text: %s, Icon: %s, Duration: %s", text, icon, duration or "persistent"))
+        lib.print.debug(string.format("Showing thought: Text: %s, Icon: %s, Duration: %s, IconColor: %s, BorderColor: %s", text, icon, duration or "persistent", iconColor or "default", borderColor or "default"))
     end)
 end
 
@@ -35,12 +37,16 @@ local function HideThought()
     end)
 end
 
-exports('ShowPersistentThought', function(text, icon)
-    ShowThought(text, icon)
+exports('ShowPersistentThought', function(text, icon, iconColor, borderColor)
+    ShowThought(text, icon, nil, iconColor, borderColor)
 end)
 
-exports('ShowTemporaryThought', function(text, icon, duration)
-    ShowThought(text, icon, duration)
+exports('ShowTemporaryThought', function(text, icon, duration, iconColor, borderColor)
+    ShowThought(text, icon, duration, iconColor, borderColor)
+end)
+
+exports('HideThought', function()
+    HideThought()
 end)
 
 local function GetRandomThought(thoughtArray)
@@ -64,9 +70,9 @@ local function CreateThoughtZone(zoneName, zoneConfig)
                 currentZone = zoneName
                 local thought = zoneConfig.randomThoughts and GetRandomThought(zoneConfig.thoughts) or zoneConfig.thoughts[1]
                 if zoneConfig.type == "persistent" then
-                    ShowThought(thought, zoneConfig.icon)
+                    ShowThought(thought, zoneConfig.icon, nil, zoneConfig.iconColor, zoneConfig.borderColor)
                 else
-                    ShowThought(thought, zoneConfig.icon, zoneConfig.duration or 5000) -- Default to 5 seconds if duration not specified
+                    ShowThought(thought, zoneConfig.icon, zoneConfig.duration or 5000, zoneConfig.iconColor, zoneConfig.borderColor) -- Default to 5 seconds if duration not specified
                 end
                 
                 AuraCheck(function()
@@ -110,7 +116,7 @@ AuraCheck(function()
         local commandName = 'trigger'..zoneName..'thought'
         RegisterCommand(commandName, function()
             local thought = zoneConfig.randomThoughts and GetRandomThought(zoneConfig.thoughts) or zoneConfig.thoughts[1]
-            ShowThought(thought, zoneConfig.icon, zoneConfig.duration)
+            ShowThought(thought, zoneConfig.icon, zoneConfig.duration, zoneConfig.iconColor, zoneConfig.borderColor)
             lib.print.debug("Test " .. zoneName .. " thought displayed: " .. thought)
         end, false)
 
@@ -123,7 +129,7 @@ AuraCheck(function()
         if args[1] and Config.Zones[args[1]] then
             local zoneConfig = Config.Zones[args[1]]
             local thought = zoneConfig.randomThoughts and GetRandomThought(zoneConfig.thoughts) or zoneConfig.thoughts[1]
-            ShowThought(thought, zoneConfig.icon, zoneConfig.duration)
+            ShowThought(thought, zoneConfig.icon, zoneConfig.duration, zoneConfig.iconColor, zoneConfig.borderColor)
             lib.print.debug("Test " .. args[1] .. " thought displayed: " .. thought)
         else
             lib.print.error("Invalid zone name. Available zones: " .. table.concat(getTableKeys(Config.Zones), ", "))

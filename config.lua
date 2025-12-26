@@ -13,6 +13,8 @@ return {
             coords = vec3(1031.7, -271.42, 50.82),  -- Coordinates of the zone center
             radius = 5,  -- Radius of the zone in meters
             icon = 'fa-poo',  -- Font Awesome icon to display
+            iconColor = '#8B4513',  -- Color for the icon
+            borderColor = '#654321',  -- Color for the border
             duration = 5000,  -- Duration in milliseconds (for temporary thoughts)
             randomThoughts = true,  -- Whether to display thoughts randomly or in order
             type = "persistent",  -- 'persistent' (stays while in zone) or 'temporary' (disappears after duration)
@@ -41,6 +43,8 @@ return {
             coords = vec3(202.91, -239.06, 53.97),
             radius = 5,
             icon = 'fa-cannabis',
+            iconColor = '#32CD32',  -- Green color for the icon
+            borderColor = '#228B22',  -- Dark green for the border
             duration = 5000,
             randomThoughts = true,
             type = "persistent",
@@ -97,6 +101,8 @@ return {
             coords = vec3(-357.07, -134.6, 38.9),
             radius = 15,
             icon = 'fa-car',
+            iconColor = '#4169E1',  -- Blue color for the icon
+            borderColor = '#0000CD',  -- Dark blue for the border
             duration = 5000,
             randomThoughts = true,
             type = "persistent",
